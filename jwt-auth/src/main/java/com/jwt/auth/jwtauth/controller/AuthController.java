@@ -33,6 +33,7 @@ public class AuthController {
     public User getUser(@RequestBody User user)
     {
         //Here I would send a fake login response
+        // I am making another change here
         return null;
     }
 
@@ -40,6 +41,7 @@ public class AuthController {
     public void logUserOff()
     {
         //I will delete the cookies and everything here
+        //I am making another change here
     }
 
 
