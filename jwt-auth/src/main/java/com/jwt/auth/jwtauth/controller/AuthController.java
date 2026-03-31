@@ -25,6 +25,7 @@ public class AuthController {
     public User addUser(@RequestBody User user){
         //Here I would send a fake register response
         // I am making a change here
+        //I am making a change here
         return null;
     }
 
