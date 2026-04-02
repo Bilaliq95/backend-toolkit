@@ -43,7 +43,6 @@ public class AuthController {
         //I will delete the cookies and everything here
         //I am making another change here
         //This is my file
-        //This is change A
     }
 
 
