@@ -1,37 +1,38 @@
 package com.jwt.auth.jwtauth.model;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
+
+import static jakarta.persistence.GenerationType.IDENTITY;
+
+@Entity
+@Table(name="users")
 public class User {
-        private String userId;
-        private LocalDate dateCreated;
+        @Id
+        @GeneratedValue(strategy = IDENTITY)
+        @Column(name = "user_id")
+        private Long userId;
+        @Column(name="email")
         private String email;
+        @Column(name="name")
         private String name;
+        @Column(name="password")
         private String password;
-        private String phoneNumber;
-        private int taskCount;
 
 
         public User(){
 
         }
 
-        public String getUserId()
+        public Long getUserId()
         {
             return this.userId;
         }
 
-        public void setUserId(String userId)
+        public void setUserId(Long userId)
         {
             this.userId=userId;
-        }
-        public LocalDate getDateCreated()
-        {
-            return this.dateCreated;
-        }
-
-        public void setDateCreated(LocalDate dateCreated)
-        {
-            this.dateCreated=dateCreated;
         }
 
         public String getEmail() {
@@ -58,21 +59,5 @@ public class User {
             this.password=password;
         }
 
-        public String getPhoneNumber(){
-            return this.phoneNumber;
-        }
-
-        public void setPhoneNumber(String phoneNumber)
-        {
-            this.phoneNumber=phoneNumber;
-        }
-
-        public int getTaskCount(){
-            return this.taskCount;
-        }
-
-        public void setTaskCount(int taskCount){
-            this.taskCount=taskCount;
-        }
 
 }

@@ -12,6 +12,7 @@ public class AuthController {
     private AuthService authService;
 
     AuthController(AuthService authService){
+
         this.authService=authService;
     }
 
@@ -23,28 +24,21 @@ public class AuthController {
 
     @PostMapping("register")
     public User addUser(@RequestBody User user){
-        //Here I would send a fake register response
-        // I am making a change here
-        //I am making a change here
-        return null;
+
+        return authService.addUser(user);
+
     }
 
     @PostMapping("login")
     public User getUser(@RequestBody User user)
     {
-        //Here I would send a fake login response
-        // I am making another change here
-        return null;
+        return authService.getUser(user.getEmail(),user.getPassword());
     }
 
     @PostMapping("logout")
-    public void logUserOff()
+    public String logUserOff()
     {
-        //I will delete the cookies and everything here
-        //I am making another change here
-        //This is my file
-        //This is change A
-        //This is change from test-branch
+        return "This is logout";
     }
 
 
