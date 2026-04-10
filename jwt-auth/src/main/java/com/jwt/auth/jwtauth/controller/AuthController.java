@@ -2,14 +2,14 @@ package com.jwt.auth.jwtauth.controller;
 
 import com.jwt.auth.jwtauth.model.User;
 import com.jwt.auth.jwtauth.service.AuthService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.jwt.auth.jwtauth.util.JwtUtil;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class AuthController {
     private AuthService authService;
+
 
     AuthController(AuthService authService){
 
@@ -30,9 +30,21 @@ public class AuthController {
     }
 
     @PostMapping("login")
-    public User getUser(@RequestBody User user)
+    public String getUser(@RequestBody User user, HttpServletResponse response)
     {
-        return authService.getUser(user.getEmail(),user.getPassword());
+        String token = authService.getUser(user.getEmail(), user.getPassword());
+        // send token as cookie
+        response.addHeader("Set-Cookie", "token=" + token + "; HttpOnly");
+        return "Login successful";
+    }
+
+    @GetMapping("/test")
+    public String test(@RequestHeader("Authorization") String header) {
+
+        String token = header.substring(7); // remove "Bearer "
+        String email = JwtUtil.extractSubject(token);
+
+        return "Token belongs to: " + email;
     }
 
     @PostMapping("logout")
@@ -40,6 +52,7 @@ public class AuthController {
     {
         return "This is logout";
     }
+
 
 
 
